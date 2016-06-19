@@ -107,5 +107,6 @@ class BasicTest extends PHPUnit_Framework_TestCase
             $hpkp->getHeader(),
             $hpkp2->getHeader()
         );
+        \unlink(__DIR__ . '/testing.json');
     }
 }
