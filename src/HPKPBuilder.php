@@ -194,6 +194,20 @@ class HPKPBuilder
     }
 
     /**
+     * Send the HPKP header
+     *
+     * @return bool
+     */
+    public function sendHPKPHeader(): bool
+    {
+        if (\headers_sent()) {
+            return false;
+        }
+        \header($this->getHeader());
+        return true;
+    }
+
+    /**
      * Coerce a string into base64 format.
      *
      * @param string $hash
