@@ -1,0 +1,40 @@
+{
+  "name": "paragonie/hpkp-builder",
+  "description": "Easily integrate HTTP Public-Key-Pinning headers into your application.",
+  "license": [
+    "GPL-3.0+",
+    "MIT",
+    "proprietary"
+  ],
+  "authors": [
+    {
+      "name": "Paragon Initiative Enterprises",
+      "email": "info@paragonie.com",
+      "homepage": "https://paragonie.com",
+      "role": "Development Team"
+    }
+  ],
+  "keywords": [
+    "Security",
+    "HPKP",
+    "security headers",
+    "headers",
+    "Hypertext",
+    "public key pinning",
+    "public key"
+  ],
+  "homepage": "https://paragonie.com",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "ParagonIE\\HPKPBuilder\\": "src/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  },
+  "require": {
+    "php": "^7.0",
+    "paragonie/constant_time_encoding": "^2"
+  }
+}
