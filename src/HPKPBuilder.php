@@ -1,10 +1,13 @@
 <?php
 declare(strict_types=1);
 namespace ParagonIE\HPKPBuilder;
-use ParagonIE\ConstantTime\Base64;
-use ParagonIE\ConstantTime\Base64UrlSafe;
-use ParagonIE\ConstantTime\Binary;
-use ParagonIE\ConstantTime\Hex;
+
+use ParagonIE\ConstantTime\{
+    Base64,
+    Base64UrlSafe,
+    Binary,
+    Hex
+};
 
 /**
  * Class HPKPBuilder
@@ -48,7 +51,7 @@ class HPKPBuilder
      *
      * @param string $hash
      * @param string $algo
-     * @return HPKPBuilder
+     * @return self
      */
     public function addHash(string $hash, string $algo = 'sha256'): self
     {
@@ -67,7 +70,7 @@ class HPKPBuilder
     /**
      * Compile the CSP header, store it in the protected $compiled property.
      *
-     * @return HPKPBuilder
+     * @return self
      */
     public function compile(): self
     {
@@ -109,7 +112,7 @@ class HPKPBuilder
      * Load configuration from a JSON file.
      *
      * @param string $filename
-     * @return HPKPBuilder
+     * @return self
      * @throws \Exception
      */
     public static function fromFile(string $filename = ''): self
@@ -118,6 +121,9 @@ class HPKPBuilder
             throw new \Exception($filename.' does not exist');
         }
         $json = \file_get_contents($filename);
+        if (!\is_string($json)) {
+            throw new \Exception('Could not read file.');
+        }
         $array = \json_decode($json, true);
         return new HPKPBuilder($array);
     }
@@ -145,7 +151,7 @@ class HPKPBuilder
      * Add the includeSubdomains directive in the HPKP header?
      *
      * @param bool $includeSubs
-     * @return HPKPBuilder
+     * @return self
      */
     public function includeSubdomains(bool $includeSubs = false): self
     {
@@ -158,7 +164,7 @@ class HPKPBuilder
      * Set the max-age parameter of the HPKP header
      *
      * @param int $maxAge
-     * @return HPKPBuilder
+     * @return self
      */
     public function maxAge(int $maxAge = 5184000): self
     {
@@ -171,7 +177,7 @@ class HPKPBuilder
      * Send a Report-Only header?
      *
      * @param bool $reportOnly
-     * @return HPKPBuilder
+     * @return self
      */
     public function reportOnly(bool $reportOnly = false): self
     {
@@ -184,7 +190,7 @@ class HPKPBuilder
      * Set the report-uri parameter of the HPKP header
      *
      * @param string $reportURI
-     * @return HPKPBuilder
+     * @return self
      */
     public function reportUri(string $reportURI): self
     {
@@ -243,11 +249,11 @@ class HPKPBuilder
 
             // Base64UrlSsafe encoded.
             if (\strpos($hash, '_') !== false || \strpos($hash, '-') !== false) {
-                $hash = Base64UrlSafe::decode($hash);
+                $hash = (string) Base64UrlSafe::decode((string) $hash);
             } else {
-                $hash = Base64::decode($hash);
+                $hash = (string) Base64::decode((string) $hash);
             }
-            $hash = Base64::encode($hash);
+            $hash = (string) Base64::encode((string) $hash);
         }
         return $hash;
     }

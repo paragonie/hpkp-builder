@@ -31,10 +31,11 @@
     }
   },
   "require-dev": {
-    "phpunit/phpunit": "*"
+    "phpunit/phpunit": "^6",
+    "vimeo/psalm": "^0|^1"
   },
   "require": {
-    "php": "^7.0",
+    "php": "^7",
     "paragonie/constant_time_encoding": "^2"
   }
 }

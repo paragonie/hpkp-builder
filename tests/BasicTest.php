@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use \ParagonIE\HPKPBuilder\HPKPBuilder;
+use ParagonIE\HPKPBuilder\HPKPBuilder;
+use PHPUnit\Framework\TestCase;
 
-class BasicTest extends PHPUnit_Framework_TestCase
+class BasicTest extends TestCase
 {
     protected function getHPKPObject($reportURI)
     {
